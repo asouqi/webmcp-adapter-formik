@@ -37,7 +37,7 @@ export function useFormikTools<TValue extends FormikValues = FormikValues>(optio
             const tools = createFormTools({
                 formId,
                 fields,
-                values: valuesRef.current,
+                getValues: () => valuesRef.current,
                 onChange: (field, value) => {
                     setFieldValueRef.current && setFieldValueRef.current(field, value)
                 },

@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "webmcp-adapter": "0.0.4",
-    "webmcp-forms": "0.0.1"
+    "webmcp-forms": "0.0.4"
   },
   "peerDependencies": {
     "react": ">=18.0.0",

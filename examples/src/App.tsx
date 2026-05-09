@@ -1,9 +1,8 @@
 import {Formik, Form, Field} from 'formik'
 import {useFormikTools} from '../../src'
-// import { FormField } from "webmcp-forms"
-import { ToolDefinition } from "webmcp-adapter"
+import type { FormField } from "webmcp-forms"
 
-const fields: Record<string, any> = {
+const fields: Record<string, FormField> = {
     name: {type: 'string', required: true, minLength: 2},
     email: {type: 'string', required: true, pattern: '^[^@]+@[^@]+\\.[^@]+$'},
     age: {type: 'number', min: 18}
