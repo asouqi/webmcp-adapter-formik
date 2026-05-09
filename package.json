@@ -1,0 +1,55 @@
+{
+  "name": "webmcp-adapter-formik",
+  "version": "0.0.1",
+  "description": "Formik integration for webmcp-forms. Connects AI-powered form tools to Formik context.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "vite build",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "webmcp-adapter": "0.0.4",
+    "webmcp-forms": "0.0.1"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "formik": ">=2.0.0"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": false
+    }
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.14",
+    "typescript": "^5.9.3",
+    "vite": "^8.0.8",
+    "vite-plugin-dts": "^4.5.4"
+  },
+  "keywords": [
+    "webmcp",
+    "mcp",
+    "formik",
+    "forms",
+    "react",
+    "ai",
+    "tools",
+    "model-context-protocol"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/asouqi/webmcp-adapter-formik.git"
+  },
+  "license": "MIT"
+}
