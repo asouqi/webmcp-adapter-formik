@@ -1,15 +1,17 @@
 import { useEffect, useRef } from "react"
-import { registerBatch } from "webmcp-adapter"
+import {registerBatch, ToolDefinition} from "webmcp-adapter"
 import { createFormTools, FormField, FormTools} from "webmcp-forms"
 import { FormikValues, useFormikContext} from "formik"
 
 export interface UseFormikToolsOptions {
-    /** Unique identifier for the from */
+    /** Unique identifier for the form */
     formId: string
     /** Fields definitions */
     fields: Record<string, FormField>
     /** Specific tools to includes (defaults to all) */
     selectedTools?: Set<FormTools>
+    /** Additional custom tools to include */
+    customTools?: ToolDefinition[]
 }
 
 /**
@@ -17,7 +19,7 @@ export interface UseFormikToolsOptions {
  * Must be used inside a <Formik> or withFormik() component.
  */
 export function useFormikTools<TValue extends FormikValues = FormikValues>(options: UseFormikToolsOptions) {
-    const { formId, fields, selectedTools } = options
+    const { formId, fields, selectedTools, customTools } = options
     const { values, setFieldValue, submitForm, resetForm } = useFormikContext<TValue>()
 
     const valuesRef = useRef(values)
@@ -47,10 +49,11 @@ export function useFormikTools<TValue extends FormikValues = FormikValues>(optio
                 onReset: () => {
                     resetFormRef.current && resetFormRef.current()
                 },
-                selectedTools
+                selectedTools,
+                customTools
             })
             const unregister = registerBatch(tools)
             return () => unregister()
         }
-    }, [formId, fields, selectedTools])
+    }, [formId, fields, selectedTools, customTools])
 }
