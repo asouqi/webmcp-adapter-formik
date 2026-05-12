@@ -4,17 +4,19 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --force",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
   "dependencies": {
+    "formik": "2.0.0",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
     "styled-components": "^6.4.1",
-    "formik": "2.0.0",
-    "webmcp-forms": "0.0.4"
+    "webmcp-forms": "0.0.7",
+    "yup": "^1.7.1",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

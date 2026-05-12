@@ -19,8 +19,8 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "webmcp-adapter": "0.0.4",
-    "webmcp-forms": "0.0.4"
+    "webmcp-adapter": "0.0.9",
+    "webmcp-forms": "0.0.9"
   },
   "peerDependencies": {
     "react": ">=18.0.0",

@@ -15,11 +15,11 @@ importers:
         specifier: '>=18.0.0'
         version: 19.2.6
       webmcp-adapter:
-        specifier: 0.0.4
-        version: 0.0.4(@mcp-b/global@2.3.1(zod@3.25.76))
+        specifier: 0.0.9
+        version: 0.0.9(@mcp-b/global@2.3.1(zod@3.25.76))
       webmcp-forms:
-        specifier: 0.0.4
-        version: 0.0.4(@mcp-b/global@2.3.1(zod@3.25.76))
+        specifier: 0.0.9
+        version: 0.0.9(@mcp-b/global@2.3.1(zod@3.25.76))
     devDependencies:
       '@types/react':
         specifier: ^19.2.14
@@ -723,13 +723,13 @@ packages:
   vscode-uri@3.1.0:
     resolution: {integrity: sha512-/BpdSx+yCQGnCvecbyXdxHDkuk55/G3xwnC0GqY4gmQ3j+A+g8kzzgB4Nk/SINjqn6+waqw3EgbVF2QKExkRxQ==}
 
-  webmcp-adapter@0.0.4:
-    resolution: {integrity: sha512-T0Wf80DV4Bol7eW5O22+wiak4hRayJNE6cUntKauEnYChM3cUBGiC46GZWuch6gytl8gPpRaKqtVWu0Dbz/Fcw==}
+  webmcp-adapter@0.0.9:
+    resolution: {integrity: sha512-+idOsL8ECF3ni2YH7rNuTOFGVFbSI1aQ8UoGM2pc71j9rQEXGDJJa7UIm3GX7Hw1mlrJGOuXHCwe3c20dXT0Iw==}
     peerDependencies:
       '@mcp-b/global': '>=2.0.0'
 
-  webmcp-forms@0.0.4:
-    resolution: {integrity: sha512-OOIaZfW//4ix+ntjhFftqBeGoR0NT0kMzXKzpdMzR83kcIykxqOPysuDiLssd8Rhj4cwDV2+oSDnWhO4QY26lA==}
+  webmcp-forms@0.0.9:
+    resolution: {integrity: sha512-Xrs7YTLt7GQhkaImIUGM4jHbh8VXnSzCYGmPayWbfkvZOVxnU7PlfAUTDZ4C0cL2i/42TMhRuGM/Ev60oFTKCg==}
 
   zod@3.25.76:
     resolution: {integrity: sha512-gzUt/qt81nXsFGKIFcC3YnfEAx5NkunCfnDlvuBSSFS02bcXu4Lmea0AFIUwbLWxWPx3d9p8S5QoaujKcNQxcQ==}
@@ -1340,14 +1340,14 @@ snapshots:
 
   vscode-uri@3.1.0: {}
 
-  webmcp-adapter@0.0.4(@mcp-b/global@2.3.1(zod@3.25.76)):
+  webmcp-adapter@0.0.9(@mcp-b/global@2.3.1(zod@3.25.76)):
     dependencies:
       '@mcp-b/global': 2.3.1(zod@3.25.76)
       '@mcp-b/webmcp-types': 2.3.1
 
-  webmcp-forms@0.0.4(@mcp-b/global@2.3.1(zod@3.25.76)):
+  webmcp-forms@0.0.9(@mcp-b/global@2.3.1(zod@3.25.76)):
     dependencies:
-      webmcp-adapter: 0.0.4(@mcp-b/global@2.3.1(zod@3.25.76))
+      webmcp-adapter: 0.0.9(@mcp-b/global@2.3.1(zod@3.25.76))
     transitivePeerDependencies:
       - '@mcp-b/global'
 
