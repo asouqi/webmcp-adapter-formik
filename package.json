@@ -1,7 +1,7 @@
 {
   "name": "webmcp-adapter-formik",
   "version": "0.0.1",
-  "description": "Formik integration for webmcp-forms. Connects AI-powered form tools to Formik context.",
+  "description": "Connect Formik forms to AI assistants via WebMCP. Enables AI to fill fields, validate inputs, manage arrays, and navigate multi-step forms.",
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -40,12 +40,18 @@
   "keywords": [
     "webmcp",
     "mcp",
+    "model-context-protocol",
     "formik",
     "forms",
     "react",
+    "react-hooks",
     "ai",
-    "tools",
-    "model-context-protocol"
+    "ai-tools",
+    "llm",
+    "claude",
+    "form-validation",
+    "form-wizard",
+    "multi-step-form"
   ],
   "repository": {
     "type": "git",
