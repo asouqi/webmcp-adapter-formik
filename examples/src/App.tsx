@@ -2,6 +2,8 @@ import {Formik, Form, Field, FieldArray, useFormikContext} from 'formik'
 import {useFormikTools, useFormikFieldArrayTools} from '../../src'
 import type { FormField } from "webmcp-forms"
 import * as Yup from 'yup'
+import {useFormikErrorTools, useFormikStatusTools} from "../../src";
+import {MultiStepForm} from "./MultiStepForm";
 
 const fields: Record<string, FormField> = {
     name: { type: 'string' },
@@ -87,6 +89,10 @@ function FormWithTools() {
         validationSchema: itemSchema,
     })
 
+    useFormikErrorTools({ formId: 'checkout' })
+
+    useFormikStatusTools({ formId: 'checkout' })
+
     const { values } = useFormikContext()
 
     return (
@@ -115,6 +121,12 @@ function FormWithTools() {
             </FieldArray>
 
             <button type="submit">Submit</button>
+
+            <br/>
+            <br/>
+            <br/>
+
+            <MultiStepForm/>
         </Form>
     )
 }

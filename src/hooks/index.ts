@@ -5,4 +5,6 @@ export { useFormikStatusTools } from "./useFormikStatusTools"
 export { useFormikStepsTools } from "./useFormikStepsTools"
 
 export type { UseFormikToolsOptions } from "./useFormikTools"
+export type { UseFormikErrorToolsOptions } from "./useFormikErrorTools"
+export type { UseFormikStatusToolsOptions } from "./useFormikStatusTools"
 export type { UseFormikStepsToolsOptions } from "./useFormikStepsTools"

@@ -25,7 +25,7 @@ export const createGoToStepTool = (config: FormStepsConfig, state: FormStepsStat
             const targetStep = typeof step === 'number' ? step :
                 steps.findIndex(s => s.toLowerCase() === step.toLowerCase())
 
-            if (targetStep < 0 || targetStep >= step.length) {
+            if (targetStep < 0 || targetStep >= steps.length) {
                 return {
                     content: [{
                         type: "text",

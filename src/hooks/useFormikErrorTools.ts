@@ -60,7 +60,7 @@ const createGetFieldError = <T>(formId: string, errorsRef: RefObject<FormikError
     })
 }
 
-interface UseFormikErrorToolsOptions {
+export interface UseFormikErrorToolsOptions {
     /** Form identifier */
     formId: string
 }
