@@ -1,198 +1,307 @@
 # webmcp-adapter-formik
 
-Formik integration for [webmcp-forms](https://github.com/asouqi/webmcp-forms) — connects AI-powered form tools to your Formik context with a single hook.
-
----
+Formik integration for [WebMCP](https://github.com/anthropics/anthropic-tools). Connect AI-powered form tools to your Formik forms.
 
 ## Installation
 
 ```bash
 npm install webmcp-adapter-formik formik webmcp-adapter webmcp-forms
-# or
-pnpm add webmcp-adapter-formik formik webmcp-adapter webmcp-forms
 ```
-
----
 
 ## Quick Start
 
 ```tsx
 import { Formik, Form, Field } from 'formik'
 import { useFormikTools } from 'webmcp-adapter-formik'
-import type { FormField } from 'webmcp-adapter-formik'
 
-const fields: Record<string, FormField> = {
-    name:  { type: 'string', required: true, minLength: 2 },
-    email: { type: 'string', required: true, pattern: '^[^@]+@[^@]+\\.[^@]+$' },
-    age:   { type: 'number', min: 18 },
+const fields = {
+    name: { type: 'string', required: true, minLength: 2 },
+    email: { type: 'string', required: true },
+    age: { type: 'number', min: 18 }
 }
 
-function FormWithTools() {
-    // One line — that's it!
-    useFormikTools({ formId: 'contact', fields })
+function MyForm() {
+    return (
+        <Formik
+            initialValues={{ name: '', email: '', age: null }}
+            onSubmit={(values) => console.log(values)}
+        >
+            <FormContent />
+        </Formik>
+    )
+}
+
+function FormContent() {
+    useFormikTools({
+        formId: 'contact',
+        fields
+    })
 
     return (
         <Form>
-            <Field name="name"  placeholder="Name" />
-            <Field name="email" type="email"  placeholder="Email" />
-            <Field name="age"   type="number" placeholder="Age" />
+            <Field name="name" placeholder="Name" />
+            <Field name="email" placeholder="Email" />
+            <Field name="age" type="number" placeholder="Age" />
             <button type="submit">Submit</button>
         </Form>
     )
 }
+```
 
-export default function App() {
+## Hooks
+
+### `useFormikTools`
+
+Main hook for form field operations. Registers tools for filling, getting, validating, submitting, and resetting form fields.
+
+```tsx
+useFormikTools({
+    formId: 'contact',
+    fields: {
+        name: { type: 'string', required: true },
+        email: { type: 'string', required: true }
+    },
+    selectedTools: new Set(['fill-field', 'get-form-state']), // Optional: limit tools
+    customTools: [...] // Optional: add custom tools
+})
+```
+
+**Tools registered:**
+- `fill_contact_field` - Set a single field value
+- `fill_contact_multiple_fields` - Set multiple field values
+- `get_contact_form_state` - Get all form values
+- `get_contact_field_value` - Get a specific field value
+- `validate_contact_form` - Validate the form
+- `submit_contact_form` - Submit the form
+- `reset_contact_form` - Reset the form
+- `clear_contact_field` - Clear a field value
+
+---
+
+### `useFormikFieldArrayTools`
+
+For managing dynamic arrays (e.g., list of addresses, phone numbers, cart items).
+
+```tsx
+useFormikFieldArrayTools({
+    formId: 'checkout',
+    fieldName: 'items',
+    itemFields: {
+        name: { type: 'string', required: true },
+        quantity: { type: 'number', min: 1 }
+    },
+    minItems: 1,
+    maxItems: 10
+})
+```
+
+**Tools registered:**
+- `get_checkout_items` - Get all items
+- `add_checkout_items` - Add a new item
+- `insert_checkout_items` - Insert item at index
+- `update_checkout_items` - Update item at index
+- `remove_checkout_items` - Remove item at index
+- `move_checkout_items` - Move item to new index
+- `swap_checkout_items` - Swap two items
+- `clear_checkout_items` - Remove all items
+
+---
+
+### `useFormikErrorTools`
+
+Exposes validation errors to AI.
+
+```tsx
+useFormikErrorTools({
+    formId: 'contact'
+})
+```
+
+**Tools registered:**
+- `get_contact_errors` - Get all validation errors
+- `get_contact_field_error` - Get error for a specific field
+
+---
+
+### `useFormikStatusTools`
+
+Exposes form status (dirty, submitting, valid, etc.) to AI.
+
+```tsx
+useFormikStatusTools({
+    formId: 'contact'
+})
+```
+
+**Tools registered:**
+- `get_contact_status` - Get form status (dirty, isSubmitting, isValid, submitCount)
+
+---
+
+### `useFormikStepsTools`
+
+For multi-step/wizard forms.
+
+```tsx
+const [activeStep, setActiveStep] = useState(0)
+
+useFormikStepsTools({
+    formId: 'checkout',
+    steps: ['Shipping', 'Payment', 'Review'],
+    currentStep: activeStep,
+    onStepChange: setActiveStep
+})
+```
+
+**Tools registered:**
+- `get_checkout_step` - Get current step info
+- `next_checkout_step` - Go to next step
+- `prev_checkout_step` - Go to previous step
+- `go_to_checkout_step` - Go to specific step
+
+---
+
+## Components
+
+### `FormikTools`
+
+Declarative component alternative to `useFormikTools`.
+
+```tsx
+<Formik initialValues={...} onSubmit={...}>
+    <Form>
+        <FormikTools formId="contact" fields={fields} />
+        <Field name="name" />
+        <Field name="email" />
+    </Form>
+</Formik>
+```
+
+---
+
+## Full Example
+
+```tsx
+import { useState } from 'react'
+import { Formik, Form, Field, FieldArray } from 'formik'
+import {
+    useFormikTools,
+    useFormikFieldArrayTools,
+    useFormikErrorTools,
+    useFormikStatusTools,
+    useFormikStepsTools
+} from 'webmcp-adapter-formik'
+
+const fields = {
+    name: { type: 'string', required: true },
+    email: { type: 'string', required: true }
+}
+
+const itemFields = {
+    product: { type: 'string', required: true },
+    quantity: { type: 'number', min: 1 }
+}
+
+function CheckoutForm() {
+    const [step, setStep] = useState(0)
+
     return (
         <Formik
-            initialValues={{ name: '', email: '', age: null }}
+            initialValues={{ name: '', email: '', items: [] }}
             onSubmit={(values) => console.log('Submitted:', values)}
         >
-            <FormWithTools />
+            <FormContent step={step} setStep={setStep} />
         </Formik>
+    )
+}
+
+function FormContent({ step, setStep }) {
+    // Form tools
+    useFormikTools({ formId: 'checkout', fields })
+
+    // Array tools
+    useFormikFieldArrayTools({
+        formId: 'checkout',
+        fieldName: 'items',
+        itemFields
+    })
+
+    // Error tools
+    useFormikErrorTools({ formId: 'checkout' })
+
+    // Status tools
+    useFormikStatusTools({ formId: 'checkout' })
+
+    // Step tools
+    useFormikStepsTools({
+        formId: 'checkout',
+        steps: ['Info', 'Items', 'Review'],
+        currentStep: step,
+        onStepChange: setStep
+    })
+
+    return (
+        <Form>
+            {step === 0 && (
+                <>
+                    <Field name="name" placeholder="Name" />
+                    <Field name="email" placeholder="Email" />
+                </>
+            )}
+
+            {step === 1 && (
+                <FieldArray name="items">
+                    {({ push, remove }) => (
+                        <>
+                            {/* Render items */}
+                            <button type="button" onClick={() => push({ product: '', quantity: 1 })}>
+                                Add Item
+                            </button>
+                        </>
+                    )}
+                </FieldArray>
+            )}
+
+            {step === 2 && <div>Review your order...</div>}
+
+            <button type="button" onClick={() => setStep(step - 1)} disabled={step === 0}>
+                Back
+            </button>
+            <button type="button" onClick={() => setStep(step + 1)} disabled={step === 2}>
+                Next
+            </button>
+            {step === 2 && <button type="submit">Submit</button>}
+        </Form>
     )
 }
 ```
 
-> **Note:** `useFormikTools` must be called inside a `<Formik>` component or a `withFormik()` HOC.
-
 ---
 
-## API
+## API Reference
 
-### `useFormikTools<TValues>(options)`
+### Field Types
 
-A React hook that registers AI-callable tools bound to the surrounding Formik context. All tools are automatically unregistered when the component unmounts.
+```typescript
+type FieldType = 'string' | 'number' | 'boolean' | 'array' | 'object'
 
-#### Options
-
-| Option             | Type                          | Required | Description                                                          |
-|--------------------|-------------------------------|----------|----------------------------------------------------------------------|
-| `formId`           | `string`                      | ✅        | Unique identifier for the form. Used as a prefix for all tool names. |
-| `fields`           | `Record<string, FormField>`   | ✅        | Field definitions (type, validation constraints, etc.)               |
-| `selectedTools`    | `Set<FormTools>`              | —        | Subset of tools to register. Defaults to all tools.                  |
-| `customTools`      | `ToolDefinition[]`            | —        | Additional custom tools to include alongside the built-in ones.      |
-| `validationSchema` | `ValidationSchema`            | —        | Optional schema (Yup, Zod, etc.) for form/field-level validation.    |
-
-#### `validationSchema` shape
-
-```ts
-{
-    form?:              any  // Used by validate-form
-    fillField?:         any  // Used by fill-field — validates { field, value }
-    fillMultipleField?: any  // Used by fill-multiple-fields — validates { fields: { ... } }
+interface FormField {
+    type: FieldType
+    label?: string
+    required?: boolean
+    options?: string[]      // For enum/select fields
+    min?: number            // For number fields
+    max?: number            // For number fields
+    minLength?: number      // For string fields
+    maxLength?: number      // For string fields
+    minItems?: number       // For array fields
+    maxItems?: number       // For array fields
+    pattern?: string        // Regex for string fields
 }
 ```
-
-If omitted, the built-in JSON Schema validator from `webmcp-forms` is used.
-
----
-
-## Available Tools
-
-Once registered, the following AI tools are available under the `{formId}` namespace:
-
-| Tool name                         | Description                                     |
-|-----------------------------------|-------------------------------------------------|
-| `fill_{formId}_field`             | Fill a single form field                        |
-| `fill_{formId}_multiple_fields`   | Fill multiple fields at once                    |
-| `get_{formId}_state`              | Get all current values, errors, and touched state |
-| `get_{formId}_field_value`        | Get a specific field's current value            |
-| `validate_{formId}_form`          | Validate all fields without submitting          |
-| `submit_{formId}_form`            | Submit the form                                 |
-| `reset_{formId}_form`             | Reset the form to its initial values            |
-| `clear_{formId}_field`            | Clear a specific field to its default empty value |
-
----
-
-## Recipes
-
-### Select specific tools only
-
-```tsx
-import { useFormikTools } from 'webmcp-adapter-formik'
-import type { FormTools } from 'webmcp-adapter-formik'
-
-useFormikTools({
-    formId: 'checkout',
-    fields,
-    selectedTools: new Set<FormTools>([
-        'fill-field',
-        'fill-multiple-field',
-        'submit-form',
-    ]),
-})
-```
-
-### With Yup validation
-
-```tsx
-import * as Yup from 'yup'
-
-const schema = Yup.object({
-    name:  Yup.string().min(2).required(),
-    email: Yup.string().email().required(),
-    age:   Yup.number().min(18),
-})
-
-const fillFieldSchema = Yup.object({
-    field: Yup.string().oneOf(['name', 'email', 'age']).required(),
-    value: Yup.mixed(),
-})
-
-const fillMultipleFieldSchema = Yup.object({
-    fields: Yup.object().shape({
-        name:  Yup.string().optional(),
-        email: Yup.string().optional(),
-        age:   Yup.number().optional(),
-    }),
-})
-
-useFormikTools({
-    formId: 'checkout',
-    fields,
-    validationSchema: {
-        form:              schema,
-        fillField:         fillFieldSchema,
-        fillMultipleField: fillMultipleFieldSchema,
-    },
-})
-```
-
-### TypeScript — typed form values
-
-```tsx
-interface MyFormValues {
-    name:  string
-    email: string
-    age:   number | null
-}
-
-function FormWithTools() {
-    useFormikTools<MyFormValues>({ formId: 'contact', fields })
-    // ...
-}
-```
-
----
-
-## Peer Dependencies
-
-| Package  | Version  |
-|----------|----------|
-| `react`  | `>= 18`  |
-| `formik` | `>= 2`   |
-
----
-
-## Related Packages
-
-| Package | Description |
-|---------|-------------|
-| [webmcp-forms](https://github.com/asouqi/webmcp-forms) | Core AI form-tools library |
-| [webmcp-adapter](https://github.com/nicholasgriffintn/webmcp-adapter) | WebMCP adapter core |
 
 ---
 
 ## License
 
-[MIT](./LICENSE)
+MIT
