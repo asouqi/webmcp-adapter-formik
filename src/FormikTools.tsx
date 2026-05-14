@@ -1,5 +1,4 @@
-import {useFormikTools} from "./useFormikTools";
-import {UseFormikToolsOptions} from "../dist";
+import { useFormikTools, UseFormikToolsOptions } from "./hooks"
 
 export function FormikTools(props: UseFormikToolsOptions) {
     useFormikTools(props)

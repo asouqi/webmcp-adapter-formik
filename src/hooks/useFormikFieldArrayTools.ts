@@ -1,8 +1,8 @@
 import {useEffect, useRef} from "react"
 import {useFormikContext} from "formik"
 import {JsonValue, registerBatch} from "webmcp-adapter"
-import {UseFormikFieldArrayToolsOptions} from "./types"
-import {createFieldArrayTools} from "./fieldArray/createFieldArrayTools"
+import {UseFormikFieldArrayToolsOptions} from "../types"
+import {createFieldArrayTools} from "../fieldArray/createFieldArrayTools"
 
 export function useFormikFieldArrayTools(options: UseFormikFieldArrayToolsOptions) {
     const { formId, fieldName, itemFields, maxItems, minItems, validationSchema, selectedTools, customTools  } = options
