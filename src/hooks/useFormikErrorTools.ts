@@ -1,5 +1,5 @@
 import { FormikErrors, FormikTouched, useFormikContext } from "formik"
-import {defineTool, registerBatch} from "webmcp-adapter"
+import {defineTool, JsonValue, registerBatch} from "webmcp-adapter"
 import {RefObject, useEffect, useRef} from "react";
 
 const createGetErrorsTool = <T>(formId: string, errorsRef: RefObject<FormikErrors<T>>) => {
@@ -41,17 +41,17 @@ const createGetFieldError = <T>(formId: string, errorsRef: RefObject<FormikError
             },
             required: ["field"]
         },
-        execute: ({ field }) => {
+        execute: ({ field }: {field: keyof FormikErrors<T> | keyof FormikTouched<T>}) => {
             const error = errorsRef.current?.[field]
             const isTouched = touchedRef.current?.[field]
             return {
                 content: [{
                     type: "text",
-                    text: error ? `${field}: ${error}${isTouched ? '' : ' (field not touched yet)'}` :
-                        `No error for ${field}`
+                    text: error ? `${String(field)}: ${error}${isTouched ? '' : ' (field not touched yet)'}` :
+                        `No error for ${String(field)}`
                 }],
                 structuredContent: {
-                    field,
+                    field: field as JsonValue,
                     error: error || null,
                     touched: isTouched || false
                 }
@@ -68,7 +68,7 @@ export interface UseFormikErrorToolsOptions {
 /**
  * Registers tools for AI to check validation errors.
  * Tool: get_errors, get_field_error */
-export function useFormikErrorTools(options: UseFormikErrorToolsOptions) {
+export function useFormikErrorTools<T>(options: UseFormikErrorToolsOptions) {
     const { formId } = options
     const { errors, touched } = useFormikContext()
 

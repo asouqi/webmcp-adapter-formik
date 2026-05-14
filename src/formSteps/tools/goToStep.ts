@@ -1,5 +1,5 @@
 import {FormStepsConfig, FormStepsState} from "../types";
-import {defineTool} from "webmcp-adapter";
+import {defineTool, JsonValue} from "webmcp-adapter";
 
 export const createGoToStepTool = (config: FormStepsConfig, state: FormStepsState) => {
     return defineTool({
@@ -22,8 +22,13 @@ export const createGoToStepTool = (config: FormStepsConfig, state: FormStepsStat
             const currentStep = state.getCurrentStep()
             const steps = config.steps
 
-            const targetStep = typeof step === 'number' ? step :
-                steps.findIndex(s => s.toLowerCase() === step.toLowerCase())
+            let targetStep
+            if (typeof step === 'string') {
+                const $step = step as string
+                targetStep = steps.findIndex(s => s.toLowerCase() === $step.toLowerCase())
+            } else {
+                targetStep = step as number
+            }
 
             if (targetStep < 0 || targetStep >= steps.length) {
                 return {
@@ -31,7 +36,7 @@ export const createGoToStepTool = (config: FormStepsConfig, state: FormStepsStat
                         type: "text",
                         text: `Invalid step "${step}". Available steps: ${steps.map((s, i) => `${i}: ${s}`).join(', ')}`
                     }],
-                    structuredContent: { success: false, reason: 'invalid_step', step }
+                    structuredContent: { success: false, reason: 'invalid_step', step: steps as JsonValue }
                 }
             }
 

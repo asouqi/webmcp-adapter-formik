@@ -34,7 +34,7 @@ const createGetFormikStatusTool = (formId: string, statusRef: RefObject<FormikSt
                     type: "text",
                     text: `Form ${formId} status:\n${statusLines.join('\n')}`
                 }],
-                structuredContent: { status: status as JsonValue }
+                structuredContent: { status: (status as unknown as JsonValue) }
             }
         }
     })
