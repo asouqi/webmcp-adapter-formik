@@ -46,6 +46,12 @@ export function useFormikTools<TValue extends FormikValues = FormikValues>(optio
     const resetFormRef = useRef(resetForm)
     resetFormRef.current = resetForm
 
+    const selectedToolsRef = useRef(selectedTools)
+    selectedToolsRef.current = selectedTools
+
+    const customToolsRef = useRef(customTools)
+    customToolsRef.current = customTools
+
     useEffect(() => {
         if (valuesRef.current) {
             const tools = createFormTools({
@@ -62,11 +68,11 @@ export function useFormikTools<TValue extends FormikValues = FormikValues>(optio
                 onReset: () => {
                     resetFormRef.current && resetFormRef.current()
                 },
-                selectedTools,
-                customTools
+                selectedTools: selectedToolsRef.current,
+                customTools: customToolsRef.current
             })
             const unregister = registerBatch(tools)
             return () => unregister()
         }
-    }, [formId, fields, selectedTools, customTools])
+    }, [formId, fields])
 }

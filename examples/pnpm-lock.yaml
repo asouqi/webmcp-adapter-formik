@@ -29,9 +29,15 @@ importers:
       styled-components:
         specifier: ^6.4.1
         version: 6.4.1(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+      webmcp-adapter:
+        specifier: 0.0.11
+        version: 0.0.11(@mcp-b/global@2.3.1(zod@4.4.3))
+      webmcp-adapter-formik:
+        specifier: 0.0.1
+        version: 0.0.1(@mcp-b/global@2.3.1(zod@4.4.3))(formik@2.0.0(react@19.2.6))(react@19.2.6)
       webmcp-forms:
-        specifier: 0.0.7
-        version: 0.0.7(@mcp-b/global@2.3.1(zod@4.4.3))
+        specifier: 0.0.10
+        version: 0.0.10(@mcp-b/global@2.3.1(zod@4.4.3))
       yup:
         specifier: ^1.7.1
         version: 1.7.1
@@ -318,6 +324,9 @@ packages:
 
   '@mcp-b/webmcp-types@2.3.1':
     resolution: {integrity: sha512-Put6k/ig+PeL8zt+oBelucCHW6OaqST39ppZU5bGKP56w6iciabelYn98341qOoU7m+tFOrUSVSTjty4kksMAw==}
+
+  '@mcp-b/webmcp-types@3.0.0':
+    resolution: {integrity: sha512-MmKHNAtlyZoK5khz5GnmgEj/ehk5esoUbgOaFndrlZvpjq3ppmIY3BDrwCv6xaihuuIMOoLLDlf0E65wUd4q7A==}
 
   '@mui/core-downloads-tracker@9.0.1':
     resolution: {integrity: sha512-GzamIIhZ1bH77dq7eKaeyRgJdkypsxin4jBFq2EMs4lBWRR0LFO1CSVMsoebn/VvjcNrnrOrjy48MkrkQUK2iw==}
@@ -1285,13 +1294,27 @@ packages:
       yaml:
         optional: true
 
-  webmcp-adapter@0.0.4:
-    resolution: {integrity: sha512-T0Wf80DV4Bol7eW5O22+wiak4hRayJNE6cUntKauEnYChM3cUBGiC46GZWuch6gytl8gPpRaKqtVWu0Dbz/Fcw==}
+  webmcp-adapter-formik@0.0.1:
+    resolution: {integrity: sha512-TAwc0NEIoW7BfrHQlkYFFXnURsDubmUIZXmYEROo3qW3FPGlNYuAl+vESOk9Cy1HKhb1mi0pycFBNV43XniHkA==}
+    peerDependencies:
+      formik: '>=2.0.0'
+      react: '>=18.0.0'
+
+  webmcp-adapter@0.0.11:
+    resolution: {integrity: sha512-GHQQ1/v4FsiqKZ9KkOTBzvL9TL1ttDwIqynSivB9fuvI9W+RQEVXsGPy+Ey/0/am+g/1ZNUqiUU+t1RU0y7h6w==}
+    peerDependencies:
+      '@mcp-b/global': '>=3.0.0'
+
+  webmcp-adapter@0.0.9:
+    resolution: {integrity: sha512-+idOsL8ECF3ni2YH7rNuTOFGVFbSI1aQ8UoGM2pc71j9rQEXGDJJa7UIm3GX7Hw1mlrJGOuXHCwe3c20dXT0Iw==}
     peerDependencies:
       '@mcp-b/global': '>=2.0.0'
 
-  webmcp-forms@0.0.7:
-    resolution: {integrity: sha512-0dgllBgQAxCv4YtcFDgaxWZRqqAIpglIc3d9+bqvBjYMzYsl1hVbIH268OzF/JMohrFOqN0kNl1HgiiE02sS4A==}
+  webmcp-forms@0.0.10:
+    resolution: {integrity: sha512-MPyKZ4fTbK8hmRsROWTiIGJPZa/0gKyKYBgkQaj5iGko1tFoPbVVkpkHL7ZnZs9DbFKCta5Fwq8BBkjK45kodQ==}
+
+  webmcp-forms@0.0.9:
+    resolution: {integrity: sha512-Xrs7YTLt7GQhkaImIUGM4jHbh8VXnSzCYGmPayWbfkvZOVxnU7PlfAUTDZ4C0cL2i/42TMhRuGM/Ev60oFTKCg==}
 
   which@2.0.2:
     resolution: {integrity: sha512-BLI3Tl1TW3Pvl70l3yq3Y64i+awpwXqsGBYWkkqMtnbXgrMD+yj7rhW0kuEDxzJaYXGjEW5ogapKNMEKNMjibA==}
@@ -1640,6 +1663,8 @@ snapshots:
       zod: 4.4.3
 
   '@mcp-b/webmcp-types@2.3.1': {}
+
+  '@mcp-b/webmcp-types@3.0.0': {}
 
   '@mui/core-downloads-tracker@9.0.1': {}
 
@@ -2489,14 +2514,34 @@ snapshots:
       '@types/node': 24.12.3
       fsevents: 2.3.3
 
-  webmcp-adapter@0.0.4(@mcp-b/global@2.3.1(zod@4.4.3)):
+  webmcp-adapter-formik@0.0.1(@mcp-b/global@2.3.1(zod@4.4.3))(formik@2.0.0(react@19.2.6))(react@19.2.6):
+    dependencies:
+      formik: 2.0.0(react@19.2.6)
+      react: 19.2.6
+      webmcp-adapter: 0.0.9(@mcp-b/global@2.3.1(zod@4.4.3))
+      webmcp-forms: 0.0.9(@mcp-b/global@2.3.1(zod@4.4.3))
+    transitivePeerDependencies:
+      - '@mcp-b/global'
+
+  webmcp-adapter@0.0.11(@mcp-b/global@2.3.1(zod@4.4.3)):
+    dependencies:
+      '@mcp-b/global': 2.3.1(zod@4.4.3)
+      '@mcp-b/webmcp-types': 3.0.0
+
+  webmcp-adapter@0.0.9(@mcp-b/global@2.3.1(zod@4.4.3)):
     dependencies:
       '@mcp-b/global': 2.3.1(zod@4.4.3)
       '@mcp-b/webmcp-types': 2.3.1
 
-  webmcp-forms@0.0.7(@mcp-b/global@2.3.1(zod@4.4.3)):
+  webmcp-forms@0.0.10(@mcp-b/global@2.3.1(zod@4.4.3)):
     dependencies:
-      webmcp-adapter: 0.0.4(@mcp-b/global@2.3.1(zod@4.4.3))
+      webmcp-adapter: 0.0.11(@mcp-b/global@2.3.1(zod@4.4.3))
+    transitivePeerDependencies:
+      - '@mcp-b/global'
+
+  webmcp-forms@0.0.9(@mcp-b/global@2.3.1(zod@4.4.3)):
+    dependencies:
+      webmcp-adapter: 0.0.9(@mcp-b/global@2.3.1(zod@4.4.3))
     transitivePeerDependencies:
       - '@mcp-b/global'
 

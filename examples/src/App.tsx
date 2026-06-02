@@ -1,9 +1,8 @@
-import {Formik, Form, Field, FieldArray, useFormikContext} from 'formik'
-import {useFormikTools, useFormikFieldArrayTools} from '../../src'
-import type { FormField } from "webmcp-forms"
+import { Formik, Form, Field, FieldArray, useFormikContext } from 'formik'
+import { useFormikTools, useFormikFieldArrayTools, useFormikErrorTools, useFormikStatusTools } from 'webmcp-adapter-formik'
+import type { FormField, FormTools } from "webmcp-forms"
 import * as Yup from 'yup'
-import {useFormikErrorTools, useFormikStatusTools} from "../../src";
-import {MultiStepForm} from "./MultiStepForm";
+import { MultiStepForm } from "./MultiStepForm";
 
 const fields: Record<string, FormField> = {
     name: { type: 'string' },
@@ -77,7 +76,7 @@ function FormWithTools() {
             fillField: fillFieldSchema,
             fillMultipleField: fillMultipleFieldSchema
         },
-        selectedTools: new Set(['fill-field', "clear-field"])
+        selectedTools: new Set<FormTools>(['fill-field', "clear-field"])
     })
 
     useFormikFieldArrayTools({

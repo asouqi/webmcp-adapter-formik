@@ -9,6 +9,7 @@ export default defineConfig({
     alias: [
       { find: 'webmcp-adapter', replacement: resolve(__dirname, '../../webmcp-adapter/src/index.ts') },
       { find: 'webmcp-forms', replacement: resolve(__dirname, '../../webmcp-forms/src/index.ts') },
+      { find: 'webmcp-adapter-formik', replacement: resolve(__dirname, '../src/index.ts') },
     ],
   },
 })

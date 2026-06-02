@@ -15,11 +15,11 @@ importers:
         specifier: '>=18.0.0'
         version: 19.2.6
       webmcp-adapter:
-        specifier: 0.0.9
-        version: 0.0.9(@mcp-b/global@2.3.1(zod@3.25.76))
+        specifier: 0.0.11
+        version: 0.0.11(@mcp-b/global@2.3.1(zod@3.25.76))
       webmcp-forms:
-        specifier: 0.0.9
-        version: 0.0.9(@mcp-b/global@2.3.1(zod@3.25.76))
+        specifier: 0.0.10
+        version: 0.0.10(@mcp-b/global@2.3.1(zod@3.25.76))
     devDependencies:
       '@types/react':
         specifier: ^19.2.14
@@ -93,6 +93,9 @@ packages:
 
   '@mcp-b/webmcp-types@2.3.1':
     resolution: {integrity: sha512-Put6k/ig+PeL8zt+oBelucCHW6OaqST39ppZU5bGKP56w6iciabelYn98341qOoU7m+tFOrUSVSTjty4kksMAw==}
+
+  '@mcp-b/webmcp-types@3.0.0':
+    resolution: {integrity: sha512-MmKHNAtlyZoK5khz5GnmgEj/ehk5esoUbgOaFndrlZvpjq3ppmIY3BDrwCv6xaihuuIMOoLLDlf0E65wUd4q7A==}
 
   '@microsoft/api-extractor-model@7.33.8':
     resolution: {integrity: sha512-aIcoQggPyer3B6Ze3usz0YWC/oBwUHfRH5ETUsr+oT2BRA6SfTJl7IKPcPZkX4UR+PohowzW4uMxsvjrn8vm+w==}
@@ -723,13 +726,13 @@ packages:
   vscode-uri@3.1.0:
     resolution: {integrity: sha512-/BpdSx+yCQGnCvecbyXdxHDkuk55/G3xwnC0GqY4gmQ3j+A+g8kzzgB4Nk/SINjqn6+waqw3EgbVF2QKExkRxQ==}
 
-  webmcp-adapter@0.0.9:
-    resolution: {integrity: sha512-+idOsL8ECF3ni2YH7rNuTOFGVFbSI1aQ8UoGM2pc71j9rQEXGDJJa7UIm3GX7Hw1mlrJGOuXHCwe3c20dXT0Iw==}
+  webmcp-adapter@0.0.11:
+    resolution: {integrity: sha512-GHQQ1/v4FsiqKZ9KkOTBzvL9TL1ttDwIqynSivB9fuvI9W+RQEVXsGPy+Ey/0/am+g/1ZNUqiUU+t1RU0y7h6w==}
     peerDependencies:
-      '@mcp-b/global': '>=2.0.0'
+      '@mcp-b/global': '>=3.0.0'
 
-  webmcp-forms@0.0.9:
-    resolution: {integrity: sha512-Xrs7YTLt7GQhkaImIUGM4jHbh8VXnSzCYGmPayWbfkvZOVxnU7PlfAUTDZ4C0cL2i/42TMhRuGM/Ev60oFTKCg==}
+  webmcp-forms@0.0.10:
+    resolution: {integrity: sha512-MPyKZ4fTbK8hmRsROWTiIGJPZa/0gKyKYBgkQaj5iGko1tFoPbVVkpkHL7ZnZs9DbFKCta5Fwq8BBkjK45kodQ==}
 
   zod@3.25.76:
     resolution: {integrity: sha512-gzUt/qt81nXsFGKIFcC3YnfEAx5NkunCfnDlvuBSSFS02bcXu4Lmea0AFIUwbLWxWPx3d9p8S5QoaujKcNQxcQ==}
@@ -800,6 +803,8 @@ snapshots:
       zod: 3.25.76
 
   '@mcp-b/webmcp-types@2.3.1': {}
+
+  '@mcp-b/webmcp-types@3.0.0': {}
 
   '@microsoft/api-extractor-model@7.33.8':
     dependencies:
@@ -1340,14 +1345,14 @@ snapshots:
 
   vscode-uri@3.1.0: {}
 
-  webmcp-adapter@0.0.9(@mcp-b/global@2.3.1(zod@3.25.76)):
+  webmcp-adapter@0.0.11(@mcp-b/global@2.3.1(zod@3.25.76)):
     dependencies:
       '@mcp-b/global': 2.3.1(zod@3.25.76)
-      '@mcp-b/webmcp-types': 2.3.1
+      '@mcp-b/webmcp-types': 3.0.0
 
-  webmcp-forms@0.0.9(@mcp-b/global@2.3.1(zod@3.25.76)):
+  webmcp-forms@0.0.10(@mcp-b/global@2.3.1(zod@3.25.76)):
     dependencies:
-      webmcp-adapter: 0.0.9(@mcp-b/global@2.3.1(zod@3.25.76))
+      webmcp-adapter: 0.0.11(@mcp-b/global@2.3.1(zod@3.25.76))
     transitivePeerDependencies:
       - '@mcp-b/global'
 

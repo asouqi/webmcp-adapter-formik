@@ -1,6 +1,6 @@
 {
   "name": "webmcp-adapter-formik",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Connect Formik forms to AI assistants via WebMCP. Enables AI to fill fields, validate inputs, manage arrays, and navigate multi-step forms.",
   "type": "module",
   "main": "./dist/index.js",
@@ -19,8 +19,8 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "webmcp-adapter": "0.0.9",
-    "webmcp-forms": "0.0.9"
+    "webmcp-adapter": "0.0.11",
+    "webmcp-forms": "0.0.10"
   },
   "peerDependencies": {
     "react": ">=18.0.0",
